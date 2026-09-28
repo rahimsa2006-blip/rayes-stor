@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Rayes Store</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Tahoma, sans-serif; }
+        body { background: #0d0d0d; color: #fff; padding: 20px; }
+        
+        .login-box {
+            max-width: 400px; margin: 100px auto;
+            background: #1a1a1a; padding: 30px;
+            border-radius: 15px; border: 1px solid #2a2a2a;
+        }
+        .login-box h1 { color: #ff8fb1; margin-bottom: 20px; text-align: center; }
+        .login-box input {
+            width: 100%; padding: 14px; margin-bottom: 15px;
+            border-radius: 10px; border: 1px solid #2a2a2a;
+            background: #0d0d0d; color: #fff; outline: none;
+        }
+        .login-box button {
+            width: 100%; padding: 14px; border: none;
+            border-radius: 10px; background: #ff8fb1;
+            color: #0d0d0d; font-weight: bold; cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .admin-panel { display: none; }
+        .admin-panel.show { display: block; }
+        
+        .admin-header {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 20px;
+            padding-bottom: 15px; border-bottom: 1px solid #2a2a2a;
+        }
+        .admin-header h1 { color: #ff8fb1; }
+        .logout-btn {
+            background: #d00; color: #fff; border: none;
+            padding: 10px 20px; border-radius: 10px; cursor: pointer;
+        }
+        
+        .add-form {
+            background: #1a1a1a; padding: 20px;
+            border-radius: 15px; border: 1px solid #2a2a2a;
+            margin-bottom: 20px;
+        }
+        .add-form h2 { color: #ff8fb1; margin-bottom: 15px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .add-form input, .add-form select {
+            width: 100%; padding: 12px;
+            border-radius: 10px; border: 1px solid #2a2a2a;
+            background: #0d0d0d; color: #fff; outline: none;
+        }
+        .add-form button {
+            background: #ff8fb1; color: #0d0d0d;
+            border: none; padding: 14px 30px;
+            border-radius: 10px; font-weight: bold;
+            cursor: pointer; font-size: 16px;
+        }
+        
+        .products-table {
+            background: #1a1a1a; border-radius: 15px;
+            border: 1px solid #2a2a2a; overflow: hidden;
+        }
+        .products-table table { width: 100%; border-collapse: collapse; }
+        .products-table th, .products-table td {
+            padding: 12px; text-align: right;
+            border-bottom: 1px solid #2a2a2a;
+            font-size: 14px;
+        }
+        .products-table th { background: #2a2a2a; color: #ff8fb1; }
+        .products-table .actions button {
+            background: #d00; color: #fff; border: none;
+            padding: 6px 12px; border-radius: 8px;
+            cursor: pointer; font-size: 12px;
+        }
+        
+        .msg {
+            padding: 12px; border-radius: 10px;
+            margin-bottom: 15px; display: none;
+        }
+        .msg.success { background: #1a4d2e; color: #6f6; display: block; }
+        .msg.error { background: #4d1a1a; color: #f66; display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- صفحة الدخول -->
+    <div class="login-box" id="loginBox">
+        <h1>🔐 دخول صاحب المحل</h1>
+        <input type="password" id="passwordInput" placeholder="أدخل كلمة السر">
+        <button id="loginBtn">دخول</button>
+    </div>
+
+    <!-- لوحة التحكم -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h1>📊 لوحة التحكم - Rayes Store</h1>
+            <button class="logout-btn" id="logoutBtn">خروج</button>
+        </div>
+
+        <div class="msg" id="msg"></div>
+
+        <!-- إضافة منتج -->
+        <div class="add-form">
+            <h2>➕ إضافة منتج جديد</h2>
+            <div class="form-row">
+                <input type="text" id="pName" placeholder="اسم المنتج">
+                <select id="pCategory">
+                    <option value="T-Shirt">T-Shirt</option>
+                    <option value="Bas">Bas</option>
+                    <option value="Baskets">Baskets</option>
+                    <option value="Chemises">Chemises</option>
+                    <option value="Ensemble">Ensemble</option>
+                    <option value="Polo">Polo</option>
+                    <option value="Shorts">Shorts</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input type="text" id="pSizes" placeholder="المقاسات (S, M, L)">
+                <input type="text" id="pColors" placeholder="الألوان (Noir, Blanc)">
+            </div>
+            <div class="form-row">
+                <input type="number" id="pPrice" placeholder="السعر (دج)">
+                <input type="text" id="pImage" placeholder="رابط الصورة (اختياري)">
+            </div>
+            <button id="addBtn">➕ إضافة المنتج</button>
+        </div>
+
+        <!-- قائمة المنتجات -->
+        <div class="products-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الاسم</th>
+                        <th>القسم</th>
+                        <th>السعر</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTbody">
+                    <tr><td colspan="5" style="text-align:center;padding:30px;">جاري التحميل...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ===== كلمة السر (غيرها كيفما تحب) =====
+        const ADMIN_PASSWORD = "rayes2025";
+
+        // ===== Supabase (نعمرها بعدين) =====
+        const SUPABASE_URL = "https://YOUR_PROJECT.sup

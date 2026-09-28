@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayes Store | متجر الريس</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Rayes Store">
+        </div>
+        <button class="cart-btn" id="cartBtn">
+            🛒 <span id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- البانر -->
+    <div class="hero-banner">
+        <img src="logo.png" alt="Rayes Store">
+        <p>أناقة تليق بك ✨ - أفضل الملابس في الجزائر 🇩🇿</p>
+    </div>
+
+    <!-- البحث -->
+    <div class="search-bar">
+        <input type="text" placeholder="🔍 ابحث عن منتج..." id="searchInput">
+    </div>
+
+    <!-- الترتيب -->
+    <div class="sort-bar">
+        <select id="sortSelect">
+            <option value="default">ترتيب: افتراضي</option>
+            <option value="price-asc">السعر: من الأقل للأعلى</option>
+            <option value="price-desc">السعر: من الأعلى للأقل</option>
+            <option value="name">الاسم: أ - ي</option>
+        </select>
+    </div>
+
+    <!-- التصنيفات -->
+    <div class="categories" id="categoriesBar">
+        <button class="active" data-category="all">الكل</button>
+    </div>
+
+    <!-- المنتجات -->
+    <div id="mainContent">
+        <div class="loading">⏳ جاري تحميل المنتجات...</div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <img src="logo.png" alt="Rayes Store">
+        <p>© 2025 Rayes Store - الجزائر 🇩🇿 | جميع الحقوق محفوظة</p>
+    </footer>
+
+    <!-- السلة -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>🛒 السلة <span class="count-badge" id="cartCountBadge">0</span></h2>
+            <button class="close-cart" id="closeCart">✖</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">السلة فارغة 🛒</div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span>عدد المنتجات</span>
+                <span id="itemsCount">0</span>
+            </div>
+            <div class="cart-total grand">
+                <span>المجموع</span>
+                <span id="cartTotal">0 دج</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+                <span>Commander</span>
+                <span id="checkoutTotal">0 دج ›</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">✅ تمت الإضافة للسلة</div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- App -->
+    <script src="app.js"></script>
+
+</body>
+</html>
